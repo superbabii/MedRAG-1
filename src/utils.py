@@ -58,9 +58,9 @@ class Retriever:
     def download_required_files(self):
         """Downloads required files for the Retriever if they do not already exist."""
         # List of base filenames to download for embedding and metadata files
-        embed_files = [f"embeds_chunk_{i}.npy" for i in range(2)]  # Embedding files: 0 to 3
-        pmid_files = [f"pmids_chunk_{i}.json" for i in range(2)]  # PMIDs metadata files: 0 to 3
-        pubmed_files = [f"pubmed_chunk_{i}.json" for i in range(2)]  # PubMed metadata files: 0 to 3
+        embed_files = [f"embeds_chunk_{i}.npy" for i in range(38)]  # Embedding files: 0 to 3
+        pmid_files = [f"pmids_chunk_{i}.json" for i in range(38)]  # PMIDs metadata files: 0 to 3
+        pubmed_files = [f"pubmed_chunk_{i}.json" for i in range(38)]  # PubMed metadata files: 0 to 3
 
         # Combine all files to create a single list
         files_to_download = embed_files + pmid_files + pubmed_files
@@ -147,7 +147,7 @@ class Retriever:
         return curr_embeddings.shape[-1]  # Assuming all embeddings have the same dimensionality
 
 
-    def construct_index(self, h_dim=768, HNSW=False, M=32, batch_size=10000):
+    def construct_index(self, h_dim=768, HNSW=False, M=32, batch_size=50000):
         """Constructs a FAISS index using the loaded embeddings and converts metadata to JSONL format."""
 
         # Ensure the output directory for metadata exists
