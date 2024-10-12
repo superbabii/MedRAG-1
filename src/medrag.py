@@ -84,7 +84,7 @@ class MedRAG:
                 {"role": "user", "content": prompt_cot}
             ]
             ans = self.generate(messages)
-            answers.append(re.sub("\s+", " ", ans))
+            answers.append(re.sub(r"\s+", " ", ans))
         else:
             for context in contexts:
                 prompt_medrag = self.templates["medrag_prompt"].render(context=context, question=question, options=options)
@@ -93,7 +93,7 @@ class MedRAG:
                         {"role": "user", "content": prompt_medrag}
                 ]
                 ans = self.generate(messages)
-                answers.append(re.sub("\s+", " ", ans))
+                answers.append(re.sub(r"\s+", " ", ans))
         
         if save_dir is not None:
             with open(os.path.join(save_dir, "snippets.json"), 'w') as f:
@@ -104,11 +104,13 @@ class MedRAG:
         return answers[0] if len(answers)==1 else answers, retrieved_snippets, scores
 
     def generate(self, messages):
- 
-        ans = openai_client(
-            model=self.model,
-            messages=messages,
-            temperature=0.0,
-        )
-        
-        return ans
+        try:
+            ans = openai_client(
+                model=self.model,
+                messages=messages,
+                temperature=0.0,
+            )
+            return ans
+        except openai.error.OpenAIError as e:
+            print(f"Error in OpenAI API call: {e}")
+            return None
