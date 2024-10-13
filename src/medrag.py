@@ -10,7 +10,6 @@ from template import *
 
 from config import config
 
-openai.api_type = openai.api_type or os.getenv("OPENAI_API_TYPE") or config.get("api_type")
 openai.api_version = openai.api_version or os.getenv("OPENAI_API_VERSION") or config.get("api_version")
 openai.api_key = openai.api_key or os.getenv('OPENAI_API_KEY') or config["api_key"]
 openai.api_base = openai.api_base or os.getenv("OPENAI_API_BASE") or config.get("api_base")
