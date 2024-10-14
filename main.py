@@ -6,7 +6,7 @@ from src.medrag import MedRAG
 with open('benchmark.json', 'r') as f:
     benchmark_data = json.load(f)
 
-# Get 5 random questions
+# Get 50 random questions
 random_questions = random.sample(list(benchmark_data.items()), 50)
 
 medrag = MedRAG(llm_name="OpenAI/gpt-3.5-turbo-16k", rag=True, retriever_name="MedCPT", corpus_name="PubMed")
@@ -26,11 +26,18 @@ for question_id, question_data in random_questions:
     answer, snippets, scores = medrag.answer(question=question, options=options, k=3)
 
     # Parse the generated answer and compare with correct answer
-    generated_answer_dict = json.loads(answer)
-    generated_choice = generated_answer_dict.get('answer_choice', None)
+    try:
+        generated_answer_dict = json.loads(answer)
+        generated_choice = generated_answer_dict.get('answer_choice', None)
+    except (json.JSONDecodeError, KeyError):
+        generated_choice = None
 
-    # Compare the generated answer with the correct one
-    is_correct = correct_answer == generated_choice[0]
+    # Check if generated_choice is valid and compare with correct answer
+    if generated_choice and len(generated_choice) > 0:
+        is_correct = correct_answer == generated_choice[0]
+    else:
+        is_correct = False  # If no valid choice, consider it incorrect
+
     if is_correct:
         correct_count += 1
 
