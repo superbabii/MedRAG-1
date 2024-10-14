@@ -151,7 +151,7 @@ class Retriever:
         """Constructs a FAISS index using the loaded embeddings and converts metadata to JSONL format."""
         
         # Set the number of threads for FAISS
-        faiss.omp_set_num_threads(16)  # Set this to the number of CPU cores you want to use
+        # faiss.omp_set_num_threads(16)  # Set this to the number of CPU cores you want to use
 
         # Ensure the output directory for metadata exists
         os.makedirs(self.index_dir, exist_ok=True)
@@ -207,7 +207,7 @@ class Retriever:
             raise ValueError("Metadata is empty. Ensure that metadata is properly loaded before retrieval.")
         
         # Set the number of threads for FAISS search
-        faiss.omp_set_num_threads(16)  # Set this to the number of CPU cores you want to use
+        # faiss.omp_set_num_threads(16)  # Set this to the number of CPU cores you want to use
 
         with torch.no_grad():
             query_embed = self.embedding_function.encode(question, **kwarg)
