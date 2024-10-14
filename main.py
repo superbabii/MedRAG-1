@@ -24,8 +24,6 @@ for question_id, question_data in random_questions:
 
     # Use MedRAG to generate the answer
     answer, snippets, scores = medrag.answer(question=question, options=options, k=3)
-    
-    print(answer)
 
     # Parse the generated answer and compare with correct answer
     generated_answer_dict = json.loads(answer)
