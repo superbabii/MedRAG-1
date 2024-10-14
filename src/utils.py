@@ -296,8 +296,8 @@ class RetrievalSystem:
             else:
                 sorted_index = np.array(scores_all).argsort()[::-1]
 
-            texts[i] = [texts_all[idx] for idx in sorted_index]
-            scores[i] = [scores_all[idx] for idx in sorted_index]
+            texts[i] = [texts_all[idx] for idx in sorted_index if idx < len(texts_all)]
+            scores[i] = [scores_all[idx] for idx in sorted_index if idx < len(scores_all)]
 
             for j, item in enumerate(texts[i]):
                 # Use 'index' as the unique identifier instead of 'id'
