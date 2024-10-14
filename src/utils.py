@@ -157,11 +157,11 @@ class Retriever:
         os.makedirs(self.index_dir, exist_ok=True)
         metadata_path = os.path.join(self.index_dir, "metadatas.jsonl")
 
-        # if HNSW:
-        index = faiss.IndexHNSWFlat(h_dim, M)
-        index.metric_type = faiss.METRIC_INNER_PRODUCT
-        # else:
-        #     index = faiss.IndexFlatIP(h_dim)
+        if HNSW:
+            index = faiss.IndexHNSWFlat(h_dim, M)
+            index.metric_type = faiss.METRIC_INNER_PRODUCT
+        else:
+            index = faiss.IndexFlatIP(h_dim)
             
         print("[In progress] Building FAISS index with pre-computed embeddings...")
 

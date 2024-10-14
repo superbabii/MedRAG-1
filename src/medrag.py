@@ -27,7 +27,7 @@ class MedRAG:
         self.docExt = None
         
         if rag:
-            self.retrieval_system = RetrievalSystem(self.retriever_name, self.corpus_name, self.db_dir, True)
+            self.retrieval_system = RetrievalSystem(self.retriever_name, self.corpus_name, self.db_dir)
         else:
             self.retrieval_system = None
             
