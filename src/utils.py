@@ -58,9 +58,9 @@ class Retriever:
     def download_required_files(self):
         """Downloads required files for the Retriever if they do not already exist."""
         # List of base filenames to download for embedding and metadata files
-        embed_files = [f"embeds_chunk_{i}.npy" for i in range(3)]  # Embedding files: 0 to 3
-        pmid_files = [f"pmids_chunk_{i}.json" for i in range(3)]  # PMIDs metadata files: 0 to 3
-        pubmed_files = [f"pubmed_chunk_{i}.json" for i in range(3)]  # PubMed metadata files: 0 to 3
+        embed_files = [f"embeds_chunk_{i}.npy" for i in range(10)]  # Embedding files: 0 to 3
+        pmid_files = [f"pmids_chunk_{i}.json" for i in range(10)]  # PMIDs metadata files: 0 to 3
+        pubmed_files = [f"pubmed_chunk_{i}.json" for i in range(10)]  # PubMed metadata files: 0 to 3
 
         # Combine all files to create a single list
         files_to_download = embed_files + pmid_files + pubmed_files
