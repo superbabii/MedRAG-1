@@ -9,7 +9,7 @@ options = {
 }
 
 medrag = MedRAG(llm_name="OpenAI/gpt-3.5-turbo-16k", rag=True, retriever_name="MedCPT", corpus_name="PubMed")
-answer, snippets, scores = medrag.answer(question=question, options=options, k=5)
+answer, snippets, scores = medrag.answer(question=question, options=options, k=3)
 
 # Printing the results
 print("Answer:", answer)
